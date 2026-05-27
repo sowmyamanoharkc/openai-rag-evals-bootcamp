@@ -1,0 +1,6 @@
+# Ignore system files
+.DS_Store
+Thumbs.d
+
+# Ignore a single specific fil
+AssignmentEvaluationByGPT5.5.txte
