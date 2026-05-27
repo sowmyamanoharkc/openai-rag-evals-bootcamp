@@ -1,0 +1,83 @@
+Acme Corp — Platform sync — May 6, 2026, 10:00 AM PT
+Recording transcribed by Otter; lightly edited for clarity.
+
+[10:00:08] Priya Raman: Okay, recording is on. Let's keep this to thirty
+minutes. Agenda is short — three items. Migration cutover, the
+embedding-cost spike, and the on-call rotation for June. Anyone want to
+add anything?
+
+[10:00:31] Marcus Liu: Quick one at the end on the new hire — we have an
+intern starting Monday and I want to make sure someone has bandwidth to
+onboard them.
+
+[10:00:42] Priya Raman: Noted. Okay, item one. Sofia, where are we on the
+Postgres 14 to 16 cutover?
+
+[10:00:58] Sofia Andrade: Replication has been clean for six days. Last
+checksum diff ran green Tuesday night. I'm comfortable cutting over this
+weekend if we have approval.
+
+[10:01:22] Priya Raman: Great. Anyone object to a Saturday 2 AM cutover?
+Marcus?
+
+[10:01:30] Marcus Liu: No objection. SRE will be on standby. I'd like a
+written runbook by EOD Thursday so the on-call doesn't have to improvise.
+
+[10:01:45] Sofia Andrade: I'll have the runbook posted by Thursday end of
+day. I'll tag both of you for review.
+
+[10:02:01] Priya Raman: Decided then — cutover Saturday May 9th at 02:00
+Pacific. Sofia owns the runbook. Action item Sofia: post runbook by
+Thursday May 7. Action item Marcus: SRE standby Saturday morning.
+
+[10:02:34] Priya Raman: Item two. The embedding-cost spike. Whoever
+turned on the new logging — thank you, but the bill went up 38% last
+week. Marcus, you saw the dashboard?
+
+[10:02:55] Marcus Liu: Yeah. The new ingest job is re-embedding documents
+on every run instead of only the ones that changed. The fix is a content
+hash check before calling the embeddings API. I can have a patch up by
+Wednesday.
+
+[10:03:18] Priya Raman: Decided — Marcus owns the de-duplication fix.
+Action item: PR opened by Wednesday May 7, merged by Friday.
+
+[10:03:32] Sofia Andrade: Are we okay rolling that into the same release
+as the cutover, or do we want it separate?
+
+[10:03:42] Marcus Liu: Separate. I don't want two unrelated changes in
+the same window if something goes wrong.
+
+[10:03:50] Priya Raman: Agreed. Decided — separate releases. Item three,
+on-call for June.
+
+[10:04:08] Priya Raman: Last cycle was Sofia, Marcus, me, and Hiroshi.
+Hiroshi's out for two weeks of paternity leave starting June 10, so we
+need a backup. Aisha volunteered last week — anyone object?
+
+[10:04:30] Marcus Liu: Aisha's only been on the team six weeks. Are we
+sure that's fair?
+
+[10:04:42] Sofia Andrade: She shadowed me for the last cycle. I think
+she's ready for primary, with secondary backup from one of us.
+
+[10:04:55] Priya Raman: Fine. Decided — Aisha takes primary on-call for
+the second half of June; Sofia is secondary. Action item Priya: update
+the PagerDuty schedule.
+
+[10:05:12] Priya Raman: Marcus, your intern question.
+
+[10:05:18] Marcus Liu: Quick — the intern's name is Jamal Okonkwo. He's
+on the data infra team for the summer. I'd love to pair him with someone
+on platform for a week so he sees how we deploy. Anyone have bandwidth?
+
+[10:05:38] Sofia Andrade: I can take him week of May 18.
+
+[10:05:43] Priya Raman: Action item Sofia: pair with Jamal week of May
+18. Marcus, send Sofia his calendar invite.
+
+[10:05:55] Priya Raman: Anything else? Going once. Going twice. Done.
+Thanks everyone.
+
+[10:06:02] Marcus Liu: Bye.
+[10:06:03] Sofia Andrade: Bye.

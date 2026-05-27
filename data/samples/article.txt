@@ -1,0 +1,49 @@
+The Quiet Rise of Vector Databases
+
+For most of the last two decades, the canonical way to put data behind an
+application was a relational database. Postgres or MySQL stored your rows;
+your application asked questions in SQL; the database returned answers in
+milliseconds. This stack worked because the questions were narrow: "give
+me the orders for customer 42", "count today's signups", "find rows where
+status = 'active'". Predicates over structured columns. Exact matches.
+
+The arrival of large language models has changed the shape of the
+questions. Modern applications increasingly ask things like "find the
+five passages in this 800-page manual that are most similar in meaning to
+the user's query". That kind of question doesn't translate cleanly to
+SQL. You're not filtering by a known column; you're searching by
+*semantic similarity* over a high-dimensional vector representation of
+text.
+
+Enter the vector database. A vector database stores embeddings — typically
+512- to 3072-dimensional float arrays produced by an embedding model — and
+indexes them so that "nearest neighbour" lookups stay fast as the dataset
+grows. Open source projects like Chroma, Qdrant and Weaviate emerged
+between 2022 and 2024, and managed services like Pinecone matured in
+parallel. Today, virtually every retrieval-augmented generation (RAG)
+system runs on top of one.
+
+What's interesting is how *boring* most production vector databases turn
+out to be. They are, at heart, a library that wraps an approximate
+nearest-neighbour index (usually HNSW), plus a metadata store, plus a
+small REST/gRPC layer. The hard part isn't the math; it's the operational
+plumbing: ingest pipelines, embedding versioning, index rebuilds, and
+crucially, evaluation. Without a gold dataset and a metric, "the search
+got better" is a vibe, not a fact.
+
+The next interesting question is whether vector search collapses back
+into the same general-purpose database that holds the rest of your data.
+Postgres has had `pgvector` since 2021. SQLite gained vector support via
+extensions. The pendulum that swung toward specialized stores may swing
+back. For most teams, the right answer is unsexy: use whatever your
+existing operational database supports, measure recall and latency
+honestly, and only reach for a dedicated vector store when the numbers
+say you have to.
+
+The lesson, if there is one, is the same lesson the database industry
+keeps re-learning every decade: new workload, new abstractions, eventual
+consolidation. Vector databases are not magic. They are a specialized
+index over an old idea — distance-based search — finally good enough to
+build products on. The interesting work has moved up the stack, into
+chunking, retrieval strategy, and evaluation. That's where the next
+generation of tooling will be built.

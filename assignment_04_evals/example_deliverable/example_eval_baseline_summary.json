@@ -1,0 +1,23 @@
+{
+  "_note": "Illustrative excerpt of a real eval report. The real file also contains the full 'items' array with retrieved_chunks, answer_text, and judge reasoning per item. Numbers here are made up for the example deliverable.",
+  "config_name": "baseline",
+  "top_k": 3,
+  "threshold": 0.30,
+  "timestamp": "2026-05-03T09:12:00Z",
+  "metrics": {
+    "overall": {
+      "recall_at_1": 0.78,
+      "recall_at_3": 0.94,
+      "recall_at_3_topk": 0.94,
+      "mrr_at_3": 0.86,
+      "mean_faithfulness": 4.71,
+      "mean_answer_relevancy": 4.62
+    },
+    "by_category": {
+      "easy":         { "n": 10, "recall_at_3": 1.00, "mean_faithfulness": 4.90, "mean_answer_relevancy": 4.90 },
+      "multihop":     { "n":  5, "recall_at_3": 0.80, "mean_faithfulness": 4.60, "mean_answer_relevancy": 4.40 },
+      "adversarial":  { "n":  3, "recall_at_3": 1.00, "mean_faithfulness": 4.33, "mean_answer_relevancy": 4.00 },
+      "out_of_scope": { "n":  3, "recall_at_3": null, "mean_faithfulness": 5.00, "mean_answer_relevancy": 5.00 }
+    }
+  }
+}
